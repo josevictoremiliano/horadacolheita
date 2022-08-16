@@ -1,0 +1,54 @@
+{% extends 'layout.html' %} 
+{% load static %} 
+{% block title %}Hora da colheita{% endblock title %} 
+{% block conteudo %}
+
+
+
+<main class="container">
+    <div id="conteudo">
+        <form class="card">
+          <div class="card-header-feira">
+            <h2>Feirantes</h2>
+            <label for="feirantes">Feirantes disponivel na feirinha</label>
+          </div>
+  
+          <div class="card-content">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="row"></div>
+                <h2>Maçã</h2>
+                <p>Feirante A, Feirante B e Feirante Z, oferecem esse produto.</p>
+                <div class="card-footer-feirantes">
+                  <input type="submit" value="Contate eles aqui" class="submit" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="jumbotron">
+                  <h2>Banana</h2>
+                  <p>
+                    Feirante H, Feirante J e Feirante y, oferecem esse produto
+                  </p>
+                  <div class="card-footer-feirantes">
+                    <input
+                      type="submit"
+                      value="Contate eles aqui"
+                      class="submit"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+</main>
+
+<footer id="footer" class="footer fixed-bottom">
+    <div class=" text-center text-light text-decoration-none">
+        <a href="https://portal.ifrn.edu.br" target="_blank">©2022 IFRN. All rights reserved </a>
+    </div>
+</footer>
+{% endblock conteudo %}

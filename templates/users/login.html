@@ -1,0 +1,43 @@
+{% extends 'layout.html' %} 
+{% load static %} 
+{% block title %}Hora da colheita{% endblock title %} 
+{% block conteudo %}
+
+<main>
+    <div id="login">
+        <form class="card">
+          <div class="card-header">
+            <h1>Login</h1>
+          </div>
+  
+          <div class="card-content">
+            <div class="card-content-area">
+              <label for="usuario">Nome do Usuário</label>
+  
+              <input type="text" id="usuario" autocomplete="off" />
+            </div>
+  
+            <div class="card-content-area">
+              <label for="password">Senha</label>
+  
+              <input type="password" id="password" autocomplete="off" />
+            </div>
+          </div>
+  
+          <div class="card-footer">
+            <input type="submit" value="login" class="submit" />
+  
+            <a href="recuperar" class="recuperar_senha">Esqueceu a senha?</a>
+            <a href="cadastro" class="cadastro"> <h2>Cadastre-se</h2> </a>
+          </div>
+        </form>
+      </div>
+</main>
+
+
+<footer id="footer" class="footer fixed-bottom ">
+    <div class=" text-center text-light ">
+        <a href="https://portal.ifrn.edu.br" target="_blank">©2022 IFRN. All rights reserved </a>
+    </div>
+</footer>
+{% endblock conteudo %}
