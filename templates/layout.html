@@ -11,7 +11,7 @@
 </head>
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
+        <div class="container">
           <a class="navbar-brand" href="/">Hora da colheita</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -21,9 +21,24 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/">Home</a>
               </li>
-              <li class="nav-item">
-                <a class="btn btn-group-sm btn-outline-light" href="/login">Fazer login</a>
-              </li>
+              {% if user.is_authenticated %} 
+                        <div class="dropdown">
+                            <button type="button" class="btn dropdown-toggle mt-1" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                              <span class="text-light">Olá, {{ user.username }}</span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="/perfil">  {{user.username }}</a></li>
+                            {% if user.is_staff%}
+                                <li><a class="dropdown-item" href="/admin">Painel Administrativo</a></li>
+                            {% endif %}
+                                <li><a class="dropdown-item" href="/deslogar"></i> Sair</a></li>
+                            </ul>
+                        </div>          
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="btn btn-success " href="{% url 'users:login' %}" value="Login">Login</a>
+                        </li>
+                    {% endif %}
             </ul>
           </div>
         </div>

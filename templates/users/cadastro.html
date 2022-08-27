@@ -1,52 +1,64 @@
 {% extends 'layout.html' %} 
+{% load widget_tweaks %} 
 {% load static %} 
 {% block title %}Hora da colheita{% endblock title %} 
 {% block conteudo %}
 
 <main>
     <div id="login">
-        <form class="card">
+        <form class="card" method="POST" enctype="multipart/form-data" id="add_item">
           <div class="card-header">
             <h1>CADASTRO</h1>
           </div>
   
-          <div class="card-content">
-            <div class="card-content-area">
-              <label for="nome">Nome Completo</label>
+            <div class="card-body">
+                {% csrf_token %}
+                
+
+                <div class="form-group">
+                  <label for="nome">Nome</label>
+                  {% render_field form.name class+="form-control" placeholder+="Nome"%}
+          
+                </div>
+                <div class="form-group">
+                  <label for="user">Usuario</label>
+                  {% render_field form.user class+="form-control" placeholder+="user"%}
+          
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  {% render_field form.email id+="email" class+="form-control" placeholder+="email"%}
+                </div>
+                
+                <div class="form-group">
+                  <label for="telefone">Telefone</label>
+                  {% render_field form.phone id+="telefone" class+="form-control" placeholder+="telefone"%}
+                </div>
+                
+                <div class="form-group">
+                  <label for="cidade">Cidade</label>
+                  {% render_field form.city id+="cidade" class+="form-control" placeholder+="Cidade"%}
+                </div>
+                <div class="form-group">
+                  <label for="senha">Senha</label>
+                  {% render_field form.password type+="password" id+="senha" class+="form-control" placeholder+="Senha"%}
+                </div>
+                <div class="form-group">
+                  <label for="senha2">Confirmar Senha</label>
+                  {% render_field form.password2 type+="password" id+="senha2" class+="form-control" placeholder+="Confirmar senha"%}
+                </div>
+
+                
+
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary ">Cadastrar</button>
+
+              <button href="login" class=" btn btn-outline-info mt-4"> Voltar</button>  
   
-              <input type="text" id="nome" autocomplete="off" />
-            </div>
-            <div class="card-content-area">
-              <label for="idade">Idade</label>
-  
-              <input type="text" id="idade" autocomplete="off" />
-            </div>
-            <div class="card-content-area">
-              <label for="email">E-mail</label>
-  
-              <input type="text" id="email" autocomplete="off" />
-            </div>
-            <div class="card-content-area">
-              <label for="telefone">Telefone</label>
-  
-              <input type="text" id="telefone" autocomplete="off" />
-            </div>
-  
-            <div class="card-content-area">
-              <label for="password">Senha</label>
-  
-              <input type="password" id="password" autocomplete="off" />
-            </div>
-          </div>
-  
-          <div class="card-footer">
-            <input type="submit" value="Cadastra-se" class="submit" />
-  
-            <a href="#" class="recuperar_senha"></a>
-            <a href="login" class="cadastro"> <h2>Voltar</h2> </a>
+            
           </div>
         </form>
-      </div>
+    </div>
 </main>
 
 

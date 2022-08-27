@@ -1,7 +1,7 @@
 body {
   padding: 0;
   margin: 0;
-  background-image: url(../img/back.png);
+  background-color: #121212 !important;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -17,6 +17,7 @@ body {
 
 .card {
   background-color: rgba(19, 19, 19, 0.3);
+  margin-top: 20px ;
   padding: 40px;
   border-radius: 2px;
 }

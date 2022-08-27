@@ -6,7 +6,7 @@ app_name = "users"
 
 urlpatterns = [
     path("login", LoginPageView, name="login"),
-    path("cadastro", CadastroPageView, name="cadastro"),
+    path("cadastro", CadastroPageView.as_view(), name="cadastro"),
     path("recuperar", RecuperarPageView, name="recuperar-senha"),
     path('deslogar', sair),
 ]

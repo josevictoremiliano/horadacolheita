@@ -15,31 +15,29 @@
   
           <div class="card-content">
             <div class="row">
-              <div class="col-md-12">
-                <div class="row"></div>
-                <h2>Maçã</h2>
-                <p>Feirante A, Feirante B e Feirante Z, oferecem esse produto.</p>
-                <div class="card-footer-feirantes">
-                  <input type="submit" value="Contate eles aqui" class="submit" />
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="jumbotron">
-                  <h2>Banana</h2>
-                  <p>
-                    Feirante H, Feirante J e Feirante y, oferecem esse produto
-                  </p>
-                  <div class="card-footer-feirantes">
-                    <input
-                      type="submit"
-                      value="Contate eles aqui"
-                      class="submit"
-                    />
+              {% if Itens == 0 %}
+              
+              {% for objects in Itens %}
+                <div class="col s12 m6 l4">
+                  <div class="card">
+                    <div class="card-image">
+                      <img src="{% static 'img/feirante.jpg' %}">
+                      <span class="card-title">{{objects.nome}}</span>
+                    </div>
+                    <div class="card-content">
+                      <p>{{objects.descricao}}</p>
+                    </div>
+                    <div class="card-action">
+                      <a href="{% url 'detalhes' objects.id %}">Detalhes</a>
+                    </div>
                   </div>
-                </div>
+                {% endfor %}
+              {% else %}
+              <div class="col s12">
+                <p>Não há feirantes cadastrados ou nenhum item disponivel</p>
               </div>
+              {% endif %}
+              
             </div>
           </div>
         </form>
