@@ -4,9 +4,9 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
-from users.forms import FeiratesForm
+from users.forms import FeirantesForm
 
-from users.models import Feirates
+from users.models import *
 
 
 # Create your views here.
@@ -27,18 +27,18 @@ def LoginPageView(request):
     return render(request, template_name, {})
 
 class tLoginPageView(LoginRequiredMixin, ListView):
-    model = Feirates
+    model = Feirantes
     template_name = 'users/login.html'
-    context_object_name = 'feirates'
+    context_object_name = 'Feirantes'
     login_url = 'login'
 
     def get_queryset(self):
-        return Feirates.objects.filter(user=self.request.user)
+        return Feirantes.objects.filter(user=self.request.user)
 
 class CadastroPageView(CreateView):
-    model = Feirates
+    model = Feirantes
     template_name = 'users/cadastro.html'
-    form_class = FeiratesForm
+    form_class = FeirantesForm
     success_url = reverse_lazy('/')
 
     def form_valid(self, form):

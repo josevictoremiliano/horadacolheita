@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class Feirates(models.Model):
+class Feirantes(models.Model):
     name = models.CharField(max_length=100)
     user = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
@@ -16,12 +16,12 @@ class Feirates(models.Model):
     def __str__(self):
         return self.name
 
-class Itens(models.Model):
+class ItensFeira(models.Model):
     name = models.CharField(max_length=100)
     price = models.CharField(max_length=100, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to='itens', blank=True, null=True)
-    feirante = models.ForeignKey(Feirates, on_delete=models.CASCADE)
+    feirante = models.ForeignKey(Feirantes, on_delete=models.CASCADE)
     data = models.DateTimeField(auto_now_add=True)
 
     

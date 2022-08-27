@@ -1,12 +1,12 @@
 from django import forms
 from .models import *
 
-class FeiratesForm(forms.ModelForm):
+class FeirantesForm(forms.ModelForm):
     class Meta:
-        model = Feirates
+        model = Feirantes
         fields = '__all__'
 
 class ItensForm(forms.ModelForm):
     class Meta:
-        model = Itens
+        model = ItensFeira
         fields = '__all__'
