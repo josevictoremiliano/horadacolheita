@@ -39,11 +39,9 @@ class CadastroPageView(CreateView):
     model = Feirantes
     template_name = 'users/cadastro.html'
     form_class = FeirantesForm
-    success_url = reverse_lazy('/')
+    success_url = reverse_lazy('feira:index')
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
+   
 
 
 
