@@ -7,30 +7,30 @@
 
 <main class="container">
     <div id="conteudo">
-        <form class="card">
-          <div class="card-header-feira">
+        <div class="card">
+          <div class="card-header">
             <h2>Feirantes</h2>
             <label for="feirantes">Feirantes disponivel na feirinha</label>
           </div>
   
-          <div class="card-content">
+          <div class="card-body">
             <div class="row">
-              {% if Itens == 0 %}
-              
-              {% for objects in Itens %}
-                <div class="col s12 m6 l4">
-                  <div class="card">
-                    <div class="card-image">
-                      <img src="{% static 'img/feirante.jpg' %}">
-                      <span class="card-title">{{objects.nome}}</span>
-                    </div>
-                    <div class="card-content">
-                      <p>{{objects.descricao}}</p>
-                    </div>
-                    <div class="card-action">
-                      <a href="{% url 'detalhes' objects.id %}">Detalhes</a>
-                    </div>
+              {% if itens %}
+              {% for itens in itens %} 
+                <div class="col-3 s12 m6  card">
+                  <div class="card-header">
+                    <img src="/media/{{itens.image}}"  class="card-img img-fluid " alt="{{itens.name}}" >
+                    <span class="card-title">{{objects.name}}</span>
                   </div>
+                  <div class="card-body">
+                    <p>{{objects.description}}</p>
+                    <p> <span>Feirante: </span> {{objects.feirante.name}}</p>
+                  </div>
+                  <div class="card-footer">
+                    <span class="card-title">R$ {{objects.price}}</span>
+                  </div>
+                    
+                </div>
                 {% endfor %}
               {% else %}
               <div class="col s12">
@@ -40,7 +40,7 @@
               
             </div>
           </div>
-        </form>
+        </div>
       </div>
 </main>
 

@@ -5,6 +5,6 @@ from .views import *
 app_name = "feira"
 
 urlpatterns = [
-    path("", IndexView.as_view(), name="index"),
+    path("", IndexView, name="index"),
 
 ]
