@@ -1,10 +1,17 @@
 body {
   padding: 0;
   margin: 0;
-  background-color: #121212 !important;
+  background: linear-gradient(90.22deg, rgb(122, 201, 67) -0.3%, rgb(2, 129, 44) 99.83%) !important;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+}
+footer{
+  background-color: #096900;
+}
+footer a{
+  text-decoration: none;
+  color: #fff;
 }
 
 #login {
