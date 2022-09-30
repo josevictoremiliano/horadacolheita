@@ -4,4 +4,4 @@ from django.contrib import admin
 # Register your models here.
 from .models import *
 
-admin.site.register([ItensFeira, Feirantes])
+admin.site.register([ItensFeira, User])

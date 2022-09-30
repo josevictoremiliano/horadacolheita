@@ -6,49 +6,51 @@
 
 <main>
     <div id="login">
-        <form class="card" method="POST" enctype="multipart/form-data" id="add_item">
+        <form class="card" method="POST" enctype='multipart-form-data' id="user">
           <div class="card-header">
             <h1>CADASTRO</h1>
           </div>
+
+          {% if msg %}
+            <div class="alert {{ class }}" role="alert">
+              {{ msg }}
+            </div>
+          {% endif %}
   
             <div class="card-body">
                 {% csrf_token %}
                 
 
                 <div class="form-group">
-                  <label for="nome">Nome</label>
-                  {% render_field form.name class+="form-control" placeholder+="Nome"%}
+                  <label for="first_name">Nome</label>
+                  <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Nome" required>
           
                 </div>
                 <div class="form-group">
-                  <label for="user">Usuario</label>
-                  {% render_field form.user class+="form-control" placeholder+="user"%}
+                  <label for="sobrenome">Sobrenome</label>
+                  <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Sobrenome" required>
           
-                </div>
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  {% render_field form.email id+="email" class+="form-control" placeholder+="email"%}
-                </div>
-                
-                <div class="form-group">
-                  <label for="telefone">Telefone</label>
-                  {% render_field form.phone id+="telefone" class+="form-control" placeholder+="telefone"%}
-                </div>
-                
-                <div class="form-group">
-                  <label for="cidade">Cidade</label>
-                  {% render_field form.city id+="cidade" class+="form-control" placeholder+="Cidade"%}
-                </div>
-                <div class="form-group">
-                  <label for="senha">Senha</label>
-                  {% render_field form.password type+="password" id+="senha" class+="form-control" placeholder+="Senha"%}
-                </div>
-                <div class="form-group">
-                  <label for="senha2">Confirmar Senha</label>
-                  {% render_field form.password2 type+="password" id+="senha2" class+="form-control" placeholder+="Confirmar senha"%}
                 </div>
 
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                </div>
                 
+                <div class="form-group">
+                  <label for="phone">Telefone</label>
+                  <input type="text" class="form-control" id="phone" name="phone" placeholder="Telefone" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="city">Cidade</label>
+                  <input type="text" class="form-control" id="city" name="city" placeholder="Cidade" required>
+                </div>
+                <div class="form-group">
+                  <label for="password">Senha</label>
+                  <input type="password" class="form-control" id="password" name="password" placeholder="Senha" required>
+                </div>
+              
 
               <div class="card-footer">
                 <button type="submit" class="btn btn-primary ">Cadastrar</button>
@@ -67,4 +69,7 @@
         <a href="https://portal.ifrn.edu.br" target="_blank">©2022 IFRN. All rights reserved </a>
     </div>
 </footer>
+<script>
+    const token = document.getElementsByName('csrfmiddlewaretoken')[0].setAttribute("id", "csrfmiddlewaretoken");
+</script>
 {% endblock conteudo %}
