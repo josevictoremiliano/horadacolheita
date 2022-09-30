@@ -1,0 +1,44 @@
+{% extends 'layout.html' %} 
+{% load static %} 
+{% block title %}Criando novo Item{% endblock title %} 
+{% block conteudo %}
+{% if form.errors %} 
+{% for field in form %} 
+{% for error in field.errors %}
+{{ error }}
+{% endfor %}
+{% endfor %}
+{% endif %}
+
+<h1 class="text-center mt-1 text-white" >Criando novo Item</h1>
+<form method="post"  class="d-flex flex-column gap-3 container  form-control mt-5 mb-5 py-5 px-4">
+{% csrf_token %}
+
+<label for="id_name">Nome:</label>
+{{form.name}}
+<label for="id_description">Descrição:</label>
+{{form.description}}
+<label for="id_price">Preço:</label>
+{{form.price}}
+<label for="id_image">Imagem:</label>
+{{form.image}}
+<label for="id_category">quem esta criando este item:</label>
+{{form.feirante}}
+<input type="submit" value="Criar Item" class="bg-success btn text-white" />
+</form>
+
+
+<input id="user_current" value="{{ request.user.id }}
+"  class="d-none"/>
+
+
+
+<script>
+    //setar o valor do campo 'id_feirante' para o usuário logado
+    current_user = document.getElementById('user_current').value;
+    const campo = document.getElementById('id_feirante')
+    campo.value = current_user
+   
+
+</script>
+{% endblock conteudo %}

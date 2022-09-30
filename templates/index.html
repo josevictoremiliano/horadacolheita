@@ -6,31 +6,32 @@
 
 
 <main class="container">
-    <div id="conteudo">
+    <div >
         <div class="card">
-          <div class="card-header">
+          <div class="card-header ">
             <h2>Feirantes</h2>
             <label for="feirantes">Feirantes disponivel na feirinha</label>
           </div>
   
           <div class="card-body">
-            <div class="row">
+            <div class="row gap-3 text-white">
               {% if itens %}
               {% for itens in itens %} 
-                <div class="col-3 s12 m6  card">
+                <div class="col-3 card">
                   <div class="card-header">
                     <img src="/media/{{itens.image}}"  class="card-img img-fluid " alt="{{itens.name}}" >
-                    <span class="card-title">{{objects.name}}</span>
+                    <span class="card-title">{{itens.name}}</span>
                   </div>
                   <div class="card-body">
-                    <p>{{objects.description}}</p>
-                    <p> <span>Feirante: </span> {{objects.feirante.name}}</p>
+                    <p class="card-text text-center">{{itens.name}}</p>
+                    <span>Feirante: </span> <p> {{itens.feirante.first_name}} {{itens.feirante.last_name}}</p>
                   </div>
                   <div class="card-footer">
-                    <span class="card-title">R$ {{objects.price}}</span>
+                    <span class="card-title">Valor: R$ {{itens.price}}</span>
                   </div>
                     
                 </div>
+
                 {% endfor %}
               {% else %}
               <div class="col s12">

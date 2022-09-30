@@ -1,0 +1,91 @@
+{% extends 'layout.html' %} 
+{% load static %} 
+{% block title %}Meu perfil{% endblock title %} 
+{% block conteudo %}
+
+<main class="flex justify-content-center align-items-center text-white">
+   <div class="container">
+      <div class="row">
+         <div class="col-12 mt-2 mb-3">
+            <h1 class="text-center">Meu perfil</h1>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-4">
+            <div class="card">
+               <div class="card-body">
+                  <div class="row">
+                     <div class="col-12 text-center mb-2">
+                        {% if user.foto %}
+                        <a href="{% url 'users:perfil-editar' user.id %}">
+                           <img src="{{ user.foto.url }}" class="img-fluid rounded-circle" alt="Foto de perfil">
+                        </a>
+                        {% else %}
+                        <!--Sem adicionar nova-->
+                        <a href="{% url 'users:perfil-editar' user.id %}">
+                           <img src="https://www.promoview.com.br/uploads/2017/04/b72a1cfe.png" class="img-fluid rounded-circle" alt="Sem foto de perfil">
+                        </a>
+                        {% endif %}
+                        <h2 class="card-title">{{ user.first_name }} {{ user.last_name }}</h2>
+                        <p class="card-text">{{ user.email }}</p>
+                     </div>
+                     <div class="col-12">
+                        
+                        <div class="d-flex justify-content-between">
+                           <a href="{% url 'users:perfil-editar' user.id %}" class="btn btn-primary w-100">Editar minhas informações</a>
+                                                     
+                        </div>
+                        <!--trocar senha-->
+                        <a href="{% url 'users:recuperar-senha' user.id %}" class="btn btn-warning w-100 mt-2">Trocar senha</a>
+                     
+                        <a href="{% url 'users:itens-criar' %}" class="btn btn-light  mt-2 w-100">Cadastrar novo item</a>
+                        <a href="{% url 'users:perfil-excluir' user.id %}" class="btn btn-danger mt-2 w-100">Excluir minha conta</a>
+
+                  
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-8">
+          <h2 class="text-center">Meus itens</h2>
+          <div class="row">
+            <!--usuario autenticado só ver seus itens-->
+            {% if itens %}
+            
+            {% for item in itens %}
+            <div class="col-sm-2 col-md-6 col-lg-4 text-dark">
+              <div class="card bg-white p-2 tex rounded-3">
+                <div class="card-body">
+                  <h5 class="card-title">{{ item.name }}</h5>
+                  <p class="card-text">{{ item.price }} R$</p>
+                  <a href="{% url 'users:itens-editar' item.id %}" class="btn btn-primary">Editar</a>
+                  <a href="{% url 'users:itens-excluir' item.id %}" class="btn btn-danger">Excluir</a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            
+           
+            {% else %}
+            <div class="col-12 align-items-center d-flex justify-content-center flex-column  mt-5">
+              <p class="text-center">Você ainda não possui itens cadastrados.</p>
+              <span><a href="{% url 'users:itens-criar' %}" class="btn btn-light">Cadastrar novo item</a></span>
+            </div>
+            
+            {% endif %}
+            
+         
+              
+        </div>
+      </div>
+   </div>
+</main>
+
+
+<footer id="footer" class="footer fixed-bottom  ">
+    <div class=" text-center text-light ">
+        <a href="https://portal.ifrn.edu.br" target="_blank">©2022 IFRN. All rights reserved </a>
+    </div>
+</footer>
+{% endblock conteudo %}

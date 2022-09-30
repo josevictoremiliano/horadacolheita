@@ -4,13 +4,8 @@ from django.shortcuts import render
 from users.forms import ItensForm
 from users.models import *
 
-def IndexPageView(request):
-   
-    return render(request, "index.html")
-
+#mostrar todos os itens no index e quem postou
 def IndexView(request):
     itens = ItensFeira.objects.all()
-    context = {
-        'itens' : itens
-    }
-    return render(request, 'index.html', context)
+
+    return render(request, 'index.html', {'itens': itens})
