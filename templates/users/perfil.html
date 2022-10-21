@@ -18,10 +18,13 @@
                      <div class="col-12 text-center mb-2">
                         {% if user.foto %}
                         <a href="{% url 'users:perfil-editar' user.id %}">
-                           <img src="{{ user.foto.url }}" class="img-fluid rounded-circle" alt="Foto de perfil">
+                           <img src="/media/{{user.foto}}" class="img-fluid rounded-circle" alt="Foto de perfil">
                         </a>
                         {% else %}
                         <!--Sem adicionar nova-->
+                        <a href="{% url 'users:perfil-editar' user.id %}">
+                           <img src="/media/{{user.foto}}" class="img-fluid rounded-circle" alt="Foto de perfil">
+                        </a>
                         <a href="{% url 'users:perfil-editar' user.id %}">
                            <img src="https://www.promoview.com.br/uploads/2017/04/b72a1cfe.png" class="img-fluid rounded-circle" alt="Sem foto de perfil">
                         </a>
@@ -57,6 +60,7 @@
             <div class="col-sm-2 col-md-6 col-lg-4 text-dark">
               <div class="card bg-white p-2 tex rounded-3">
                 <div class="card-body">
+                  <img src="/media/{{item.image}}" alt="" class="img-fluid">
                   <h5 class="card-title">{{ item.name }}</h5>
                   <p class="card-text">{{ item.price }} R$</p>
                   <a href="{% url 'users:itens-editar' item.id %}" class="btn btn-primary">Editar</a>

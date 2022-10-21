@@ -17,7 +17,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
     is_active = models.BooleanField(_('active'), default=True)
     is_staff = models.BooleanField(_('staff'), default=True) 
-    avatar = models.ImageField(_('foto'),upload_to='avatars/', null=True, blank=True)
+    avatar = models.ImageField(_('foto'),upload_to='imagens', null=True, blank=True)
     phone = models.CharField(_('Celular'),max_length=100)
     city = models.CharField(_('cidade'),max_length=100)
     

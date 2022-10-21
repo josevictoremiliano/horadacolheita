@@ -19,7 +19,7 @@
               {% for itens in itens %} 
                 <div class="col-3 card">
                   <div class="card-header">
-                    <img src={% static '/media/' %}  class="card-img img-fluid " alt="{{itens.name}}" >
+                    <img src="/media/{{itens.image}}"  class="card-img img-fluid " alt="{{itens.name}}" >
                     <span class="card-title">{{itens.name}}</span>
                   </div>
                   <div class="card-body">

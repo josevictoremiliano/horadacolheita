@@ -94,13 +94,13 @@ class PerfilPageView(ListView):
     def get_ordering (self):
         return ['id']
 
-#editar perfil
+#editar perfil enviar fotos e dados
 def PerfilEditView(request, pk):
     template_name = 'users/perfil-editar.html'
     data = {}
-    perfil = User.objects.get(pk=pk)
-    form = UserForm(request.POST or None, instance=perfil)
-    data['perfil'] = perfil
+    user = User.objects.get(pk=pk)
+    form = UserForm(request.POST or None, request.FILES or None, instance=user)
+    data['user'] = user
     data['form'] = form
     if request.method == 'POST':
         if form.is_valid():
@@ -110,6 +110,7 @@ def PerfilEditView(request, pk):
             data['form'] = form
             print(form.errors)
     return render(request, template_name, data)
+
 
 class PerfilDeleteView(DeleteView):
     model = User
