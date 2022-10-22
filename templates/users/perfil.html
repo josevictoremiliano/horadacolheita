@@ -3,7 +3,7 @@
 {% block title %}Meu perfil{% endblock title %} 
 {% block conteudo %}
 
-<main class="flex justify-content-center align-items-center text-white">
+<main class="flex justify-content-center align-items-center text-white" style="height: 100vh">
    <div class="container">
       <div class="row">
          <div class="col-12 mt-2 mb-3">
@@ -16,15 +16,12 @@
                <div class="card-body">
                   <div class="row">
                      <div class="col-12 text-center mb-2">
-                        {% if user.foto %}
+                        {% if user.avatar %}
                         <a href="{% url 'users:perfil-editar' user.id %}">
-                           <img src="/media/{{user.foto}}" class="img-fluid rounded-circle" alt="Foto de perfil">
+                           <img src="/media/{{user.avatar}}" class="img-fluid rounded-circle" alt="Foto de perfil">
                         </a>
                         {% else %}
                         <!--Sem adicionar nova-->
-                        <a href="{% url 'users:perfil-editar' user.id %}">
-                           <img src="/media/{{user.foto}}" class="img-fluid rounded-circle" alt="Foto de perfil">
-                        </a>
                         <a href="{% url 'users:perfil-editar' user.id %}">
                            <img src="https://www.promoview.com.br/uploads/2017/04/b72a1cfe.png" class="img-fluid rounded-circle" alt="Sem foto de perfil">
                         </a>
@@ -33,6 +30,7 @@
                         <p class="card-text">{{ user.email }}</p>
                      </div>
                      <div class="col-12">
+                        
                         
                         <div class="d-flex justify-content-between">
                            <a href="{% url 'users:perfil-editar' user.id %}" class="btn btn-primary w-100">Editar minhas informações</a>
@@ -87,7 +85,7 @@
 </main>
 
 
-<footer id="footer" class="footer fixed-bottom  ">
+<footer id="footer" class="footer">
     <div class=" text-center text-light ">
         <a href="https://portal.ifrn.edu.br" target="_blank">©2022 IFRN. All rights reserved </a>
     </div>

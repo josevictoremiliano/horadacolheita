@@ -53,7 +53,7 @@ class ItensFeira(models.Model):
     name = models.CharField(max_length=100)
     price = models.CharField(max_length=100, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    image = models.ImageField(upload_to='itens', blank=True, null=True)
+    image = models.ImageField(upload_to='itens/', blank=True)
     feirante = models.ForeignKey(User, on_delete=models.CASCADE)
     data = models.DateTimeField(auto_now_add=True)
 

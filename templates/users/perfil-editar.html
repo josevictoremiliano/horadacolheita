@@ -12,7 +12,13 @@
         <div class="row">
             <div class="col-md-12">
                 <h1>Meu perfil</h1>
-                <form action="{% url 'users:perfil' %}" method="post">
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <p>Por favor, corrija o erro abaixo.</p>
+                        {{ form.errors }}
+                    </div>
+                {% endif %}
+                <form action="" method="post"  enctype="multipart/form-data" >
                     {% csrf_token %}
                     <div class="d-flex justify-content-between gap-3">
                         <div class="form-group w-100">
@@ -24,28 +30,35 @@
                             <input type="text" class="form-control" id="sobrenome" name="sobrenome" value="{{ user.last_name }}">
                         </div>
                     </div>
+                    <div class="d-flex justify-content-between gap-3">
+                        <div class="form-group w-100">
+                            <label for="city">Cidade</label>
+                            <input type="text" class="form-control" id="city" name="city" value="{{ user.city }}">
+                        </div>
+                        <div class="form-group w-100">
+                            <label for="phone">Telefone</label>
+                            <input type="text" class="form-control" id="phone" name="phone" value="{{ user.phone }}">
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" disabled>
                     </div>
+                    
                     <div class="form-group">
-                        <label for="senha">Senha</label>
-                        <input type="password" class="form-control" id="senha" name="senha">
+                        <label for="avatar">Trocar avatar</label>
+                        <input type="file" class="form-control" id="avatar" name="avatar">
                     </div>
-                    <div class="form-group">
-                        <label for="senha2">Confirme a senha</label>
-                        <input type="password" class="form-control" id="senha2" name="senha2">
-                    </div>
-                    <div class="form-group">
-                        <label for="foto">Trocar foto</label>
-                        <input type="file" class="form-control" id="foto" name="foto">
-                    </div>
+
+        
                     <button type="submit" class="btn btn-primary mt-3">Salvar</button>
                 </form>
             </div>
 
         </div>
+        
 
+        
 {% else %} 
     <p>Você não está logado.</p> 
 {% endif %} 
