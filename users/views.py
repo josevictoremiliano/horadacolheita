@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout as auth_login
 from django.contrib.auth.models import Group
 
 
-from users.forms import ItensForm, ItensFormExtends, UserForm
+from users.forms import ItensForm, ItensFormExtends, UserForm, UserFormEdit
 
 from users.models import *
 
@@ -80,6 +80,10 @@ class PerfilPageView(ListView):
     template_name = 'users/perfil.html'
 
     
+    #get all information from user
+    def get_queryset(self):
+        return User.objects.all()
+        
 
     #get itens do usuario logado
     def get_context_data(self, **kwargs):
@@ -99,9 +103,11 @@ def PerfilEditView(request, pk):
     template_name = 'users/perfil-editar.html'
     data = {}
     user = User.objects.get(pk=pk)
-    form = UserForm(request.POST or None, request.FILES or None, instance=user)
+    form = UserFormEdit(request.POST or None, request.FILES or None, instance=user)
+    
     data['user'] = user
     data['form'] = form
+
     if request.method == 'POST':
         if form.is_valid():
             form.save()
@@ -109,7 +115,11 @@ def PerfilEditView(request, pk):
         else:
             data['form'] = form
             print(form.errors)
+
     return render(request, template_name, data)
+
+
+
 
 
 class PerfilDeleteView(DeleteView):
@@ -123,9 +133,10 @@ def ItensEditView(request, pk):
     template_name = 'users/itens-editar.html'
     data = {}
     itens = ItensFeira.objects.get(pk=pk)
-    form = ItensForm(request.POST or None, instance=itens)
+    form = ItensForm(request.POST or None, request.FILES or None, instance=itens)
     data['itens'] = itens
     data['form'] = form
+    
     current_user = request.user
     if request.method == 'POST':
         #setar o usuario logado como dono do item
