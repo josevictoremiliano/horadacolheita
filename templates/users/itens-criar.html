@@ -1,6 +1,7 @@
 {% extends 'layout.html' %} 
 {% load static %} 
 {% block title %}Criando novo Item{% endblock title %} 
+{%block active%}active{% endblock active%}
 {% block conteudo %}
 {% if form.errors %} 
 {% for field in form %} 

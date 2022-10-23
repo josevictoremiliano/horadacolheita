@@ -59,16 +59,6 @@ def CadastroPageView(request):
 
     return render(request, 'users/cadastro.html', data)
 
-def RecuperarPageView(request, pk):
-    #trocar a senha
-    user = User.objects.get(pk=pk, email=request.user.email)
-    user.set_password(request.POST['trocasenha'])
-    user.save()
-    logout(request)
-    redirect('/')
-   
-    return render(request, "users/recuperar.html")
-
 def logout(request):
     auth_login(request)
     return redirect('/')
@@ -178,4 +168,18 @@ def ItensCreateView(request):
         form = ItensFormExtends()
         data['form'] = form
     return render(request, template_name, data)
-    
+
+#esqueci minha senha
+def EsqueciSenhaView(request):
+    template_name = 'users/esqueci-senha.html'
+    data = {}
+    if request.method == 'POST':
+        email = request.POST['email']
+        user = User.objects.get(email=email)
+        if user is not None:
+            data['msg'] = 'Usuário ou senha inválidos!'
+            data['class'] = 'alert-danger'
+        else:
+            data['msg'] = 'Usuário ou senha inválidos!'
+            data['class'] = 'alert-danger'
+    return render(request, template_name, data)

@@ -5,6 +5,7 @@
 
 <main>
     <div id="login">
+        {{ form.msg }}
         <form class="card" method="POST">
             {% csrf_token %}
             <a href="login" class="mb-4 text-decoration-none text-light align-self-start">< voltar</a>
@@ -15,7 +16,7 @@
 
             <div class="card-content">
                 <div class="card-content-area">
-                    <input type="text" id="email" autocomplete="on" />
+                    <input type="text" id="email" name="email" autocomplete="on" />
                     <label for="email" class="text-center ">Coloque aqui seu email</label>
                 </div>
                 <div class="card-content-area">
