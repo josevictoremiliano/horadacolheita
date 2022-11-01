@@ -48,14 +48,25 @@ def CadastroPageView(request):
             city=request.POST['city'],
            )
         user.username = request.POST['email']
-        group = Group.objects.get(name='feirantes')
-        user.groups.add(group)
-        user.save()
-        data['msg'] = 'Usuário cadastrado com sucesso!'
-        data['class'] = 'alert-success'
+
+        if Group.objects.filter(name='feirante').exists():
+            group = Group.objects.get(name='feirante')
+            user.groups.add(group)
+            user.save()
+            data['msg'] = 'Usuário cadastrado com sucesso!'
+            data['class'] = 'alert-success'
+        else:
+            group = Group.objects.create(name='feirante')
+            user.groups.add(group)
+            user.save()
+            data['msg'] = 'Usuário cadastrado com sucesso!'
+            data['class'] = 'alert-success'
+
+       
         return redirect('/')
     else:
         print (request.POST)
+       
 
     return render(request, 'users/cadastro.html', data)
 
