@@ -2,73 +2,92 @@
 {% load widget_tweaks %} 
 {% load static %} 
 {% block title %}Hora da colheita{% endblock title %} 
+{% block css %}{% static '\css\cadastro.css' %}{% endblock css %}
 {% block conteudo %}
 
-<main>
-    <div id="login">
-        <form class="card text-white" method="POST" enctype='multipart-form-data' id="user">
-          <div class="card-header">
-            <h1>CADASTRO</h1>
-          </div>
 
-          {% if msg %}
-            <div class="alert {{ class }}" role="alert">
-              {{ msg }}
+<section class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-xl-10">
+        <div class="card border-0">
+            <div class="card-body p-0">
+                <div class="row no-gutters">
+                    <div class="col-lg-6">
+                        <div class="p-5">
+                            <div class="mb-5">
+                                <h3 class="h4 font-weight-bold text-theme">Cadastro</h3>
+                                <p class="text-muted mt-2 mb-5">Venha ser um feirante do IFSol</p>
+                            </div>
+                            {% if msg %}
+                              <div class="alert {{ class }}" role="alert">
+                                {{ msg }}
+                              </div>
+                            {% endif %}
+                            
+
+                            <form method="POST" enctype='multipart-form-data'>
+                              {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email">
+                                </div>
+                                <div class="form-group">
+                                  <label for="first_name">Nome</label>
+                                  <input type="text" class="form-control" id="first_name" name="first_name">
+                              </div>
+                              <div class="form-group">
+                                  <label for="last_name">Sobrenome</label>
+                                  <input type="text" class="form-control" id="last_name" name="last_name">
+                              </div>
+                              <div class="form-group">
+                                  <label for="phone">Telefone</label>
+                                  <input type="text" class="form-control" id="phone" name="phone">
+                              </div>
+                              <div class="form-group">
+                                  <label for="city">Cidade</label>
+                                  <input type="text" class="form-control" id="city" name="city">
+                              </div>
+                              <div class="form-group  mb-5">
+                                  <label for="password">Senha</label>
+                                  <input type="password" class="form-control" id="password" name="password">
+                              </div>
+                                <button type="submit" class="btn btn-theme">Cadastre-se</button>
+
+                                <p class=" text-muted mt-3 mb-0"> Já tem conta? <a href="login" class="text-primary ml-1">Faça login</a></p>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 d-none d-lg-inline-block">
+                        <div class="account-block rounded-right">
+                            <div class="overlay rounded-right">
+                             
+                            </div>
+                            
+                            <div class="account-testimonial">
+                              <img src="{% static '/img/cadastroImg.svg' %}" alt="login img" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-          {% endif %}
-  
-            <div class="card-body">
-                {% csrf_token %}
-                
+            <!-- end card-body -->
+        </div>
+        <!-- end card -->
 
-                <div class="form-group">
-                  <label for="first_name">Nome</label>
-                  <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Nome" required>
-          
-                </div>
-                <div class="form-group">
-                  <label for="sobrenome">Sobrenome</label>
-                  <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Sobrenome" required>
-          
-                </div>
+        
 
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
-                </div>
-                
-                <div class="form-group">
-                  <label for="phone">Telefone</label>
-                  <input type="text" class="form-control" id="phone" name="phone" placeholder="Telefone" required>
-                </div>
-                
-                <div class="form-group">
-                  <label for="city">Cidade</label>
-                  <input type="text" class="form-control" id="city" name="city" placeholder="Cidade" required>
-                </div>
-                <div class="form-group">
-                  <label for="password">Senha</label>
-                  <input type="password" class="form-control" id="password" name="password" placeholder="Senha" required>
-                </div>
-              
+        <!-- end row -->
 
-              <div class="card-footer">
-                <button type="submit" class="btn btn-primary ">Cadastrar</button>
-
-              <button href="login" class=" btn btn-secondary mt-4"> Voltar</button>  
-  
-            
-          </div>
-        </form>
     </div>
-</main>
+    <!-- end col -->
+</div>
+
+</section>
 
 
-<footer id="footer" class="footer fixed-bottom ">
-    <div class=" text-center text-light ">
-        <a href="https://portal.ifrn.edu.br" target="_blank">©2022 IFRN. All rights reserved </a>
-    </div>
-</footer>
+
 <script>
     const token = document.getElementsByName('csrfmiddlewaretoken')[0].setAttribute("id", "csrfmiddlewaretoken");
 </script>

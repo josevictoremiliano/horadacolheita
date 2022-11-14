@@ -26,7 +26,7 @@ def LoginPageView(request):
         else:
             data['msg'] = 'Usuário ou senha inválidos!'
             data['class'] = 'alert-danger'
-
+            
     return render(request, template_name, data)
     
 
@@ -55,6 +55,8 @@ def CadastroPageView(request):
         data['class'] = 'alert-success'
         return redirect('/')
     else:
+        data['msg'] = 'Usuário não cadastrado!'
+        data['class'] = 'alert-danger'
         print (request.POST)
 
     return render(request, 'users/cadastro.html', data)

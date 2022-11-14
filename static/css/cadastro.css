@@ -1,0 +1,59 @@
+body{
+    background-image: url(../img/mesaComItens.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.account-block {
+    padding: 0;
+    background-image: url(https://cdn.pixabay.com/photo/2020/07/15/00/31/green-5406030_1280.jpg);
+    box-shadow: 0 4px 30px rgba(2, 196, 44, 0.616);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    position: relative;
+    border-radius: 5px ;
+  }
+  
+  .account-block .overlay {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .account-block .account-testimonial {
+    text-align: center;
+    color: #fff;
+    position: absolute;
+    margin: 0 auto;
+    padding: 0 1.75rem;
+    bottom: 9rem;
+    left: 0;
+    right: 0;
+  }
+  
+  .text-theme {
+    color: #1a833a !important;
+  }
+  
+  .btn-theme {
+    background-color: #25a85c !important;
+    border-color: #53f89d !important;
+    color: #fff !important;
+  }
+
+  .btn-theme:hover {
+    background-color: #38c578 !important;
+    border-color: #ffffff !important;
+    color: #fff !important;
+  }
+  
+  

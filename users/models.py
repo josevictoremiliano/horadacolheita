@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+import os
 
 from django.db import models
 from django.core.mail import send_mail
@@ -60,5 +61,9 @@ class ItensFeira(models.Model):
     
     def __str__(self):
         return self.name
+    
+    def delete(self, using=None, keep_parents=False):
+        os.rmdir(self.file.path)
+        return super().delete(using, keep_parents)
 
 

@@ -1,13 +1,14 @@
 {% extends 'layout.html' %} 
 {% load static %} 
 {% block title %}Meu perfil{% endblock title %} 
-{%block active%}active{% endblock active%}
+{% block activepf %}active{% endblock activepf %}
+{% block css %}{% static '\css\index.css' %}{% endblock css %}
 {% block conteudo %}
 
-<main class="flex justify-content-center align-items-center text-white" style="height: 100vh">
+<main class="flex justify-content-center container align-items-center card-glass-perfil my-5" style="height: 100vh">
    <div class="container">
       <div class="row">
-         <div class="col-12 mt-2 mb-3">
+         <div class="col-12 mt-3 mb-3">
             <h1 class="text-center">Meu perfil</h1>
          </div>
       </div>
@@ -19,7 +20,7 @@
                      <div class="col-12 text-center mb-2">
                         {% if user.avatar %}
                         <a href="{% url 'users:perfil-editar' user.id %}">
-                           <img src="/media/{{user.avatar}}" class="img-fluid rounded-circle" alt="Foto de perfil">
+                           <img src="/media/{{user.avatar}}" class="img-fluid rounded-circle imgPerfil" alt="Foto de perfil">
                         </a>
                         {% else %}
                         <!--Sem adicionar nova-->
@@ -27,8 +28,8 @@
                            <img src="https://www.promoview.com.br/uploads/2017/04/b72a1cfe.png" class="img-fluid rounded-circle" alt="Sem foto de perfil">
                         </a>
                         {% endif %}
-                        <h2 class="card-title">{{ user.first_name }} {{ user.last_name }}</h2>
-                        <p class="card-text">{{ user.email }}</p>
+                        <h2 class="card-title text-black-50">{{ user.first_name }} {{ user.last_name }}</h2>
+                        <p class="card-text text-black-50">{{ user.email }}</p>
                      </div>
                      <div class="col-12">
                         
@@ -38,7 +39,7 @@
                                                      
                         </div>
                         <!--trocar senha-->
-                        <a href="{% url 'users:recuperar-senha' user.id %}" class="btn btn-warning w-100 mt-2">Trocar senha</a>
+                        <a href="#" class="btn btn-warning w-100 mt-2">Trocar senha</a>
                      
                         <a href="{% url 'users:itens-criar' %}" class="btn btn-light  mt-2 w-100">Cadastrar novo item</a>
                         <a href="{% url 'users:perfil-excluir' user.id %}" class="btn btn-danger mt-2 w-100">Excluir minha conta</a>
@@ -49,7 +50,7 @@
                </div>
             </div>
          </div>
-         <div class="col-8">
+         <div class="col-8 card-glass-perfil">
           <h2 class="text-center">Meus itens</h2>
           <div class="row">
             <!--usuario autenticado só ver seus itens-->
@@ -58,8 +59,9 @@
             {% for item in itens %}
             <div class="col-sm-2 col-md-6 col-lg-4 text-dark">
               <div class="card bg-white p-2 tex rounded-3">
+               <img src="/media/{{item.image}}" alt="" class="img-fluid card-img">
                 <div class="card-body">
-                  <img src="/media/{{item.image}}" alt="" class="img-fluid">
+                  
                   <h5 class="card-title">{{ item.name }}</h5>
                   <p class="card-text">{{ item.price }} R$</p>
                   <a href="{% url 'users:itens-editar' item.id %}" class="btn btn-primary">Editar</a>
@@ -86,9 +88,4 @@
 </main>
 
 
-<footer id="footer" class="footer">
-    <div class=" text-center text-light ">
-        <a href="https://portal.ifrn.edu.br" target="_blank">©2022 IFRN. All rights reserved </a>
-    </div>
-</footer>
 {% endblock conteudo %}

@@ -12,7 +12,7 @@
 {% endif %}
 
 <h1 class="text-center mt-1 text-white" >Criando novo Item</h1>
-<form method="post"  class="d-flex flex-column gap-3 container  form-control mt-5 mb-5 py-5 px-4">
+<form method="post"  enctype='multipart-form-data' class="d-flex flex-column gap-3 container  form-control mt-5 mb-5 py-5 px-4">
 {% csrf_token %}
 
 <label for="id_name">Nome:</label>
