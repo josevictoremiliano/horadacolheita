@@ -22,3 +22,8 @@ class UserFormEdit(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'phone', 'city', 'avatar']
+
+class PasswordChangeForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['password']

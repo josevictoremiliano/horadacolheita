@@ -9,7 +9,7 @@ app_name = "users"
 urlpatterns = [
     path("login", LoginPageView, name="login"),
     path("cadastro", CadastroPageView, name="cadastro"),
-    path("recuperar", EsqueciSenhaView, name="recuperar-senha"),
+    path("recuperarSenha", RecuperarSenhaView, name="recuperarSenha"),
     path('deslogar', logout),
     #perfil
     path('perfil', PerfilPageView.as_view(), name='perfil'),

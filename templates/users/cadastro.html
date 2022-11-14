@@ -25,7 +25,7 @@
                             {% endif %}
                             
 
-                            <form method="POST" enctype='multipart-form-data'>
+                            <form method="POST" enctype='multipart-form-data' >
                               {% csrf_token %}
                                 <div class="form-group">
                                     <label for="email">Email</label>
@@ -87,8 +87,13 @@
 </section>
 
 
-
 <script>
+    if (document.getElementById('mensagem').classList.contains('alert-success')) {
+        setTimeout(function () {
+            window.location.href = '/login';
+        }, 3000);
+    }
+
     const token = document.getElementsByName('csrfmiddlewaretoken')[0].setAttribute("id", "csrfmiddlewaretoken");
 </script>
 {% endblock conteudo %}

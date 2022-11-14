@@ -1,14 +1,17 @@
+from time import sleep
+
+from django.contrib.auth import authenticate, login, update_session_auth_hash
+from django.contrib.auth import logout as auth_login
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.contrib.auth import authenticate, login, logout as auth_login
-from django.contrib.auth.models import Group
+from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
+                                  UpdateView)
 
-
-from users.forms import ItensForm, ItensFormExtends, UserForm, UserFormEdit
-
+from users.forms import (ItensForm, ItensFormExtends, PasswordChangeForm,
+                         UserForm, UserFormEdit)
 from users.models import *
 
 
@@ -31,6 +34,7 @@ def LoginPageView(request):
     
 
 def CadastroPageView(request):
+    template_name = 'users/cadastro.html'
     data = {}
     csrfmiddlewaretoken = request.POST.get('csrfmiddlewaretoken')
 
@@ -53,13 +57,10 @@ def CadastroPageView(request):
         user.save()
         data['msg'] = 'Usuário cadastrado com sucesso!'
         data['class'] = 'alert-success'
-        return redirect('/')
     else:
-        data['msg'] = 'Usuário não cadastrado!'
-        data['class'] = 'alert-danger'
-        print (request.POST)
+        data['form'] = UserForm()
 
-    return render(request, 'users/cadastro.html', data)
+    return render(request, template_name, data)
 
 def logout(request):
     auth_login(request)
@@ -171,17 +172,24 @@ def ItensCreateView(request):
         data['form'] = form
     return render(request, template_name, data)
 
-#esqueci minha senha
-def EsqueciSenhaView(request):
-    template_name = 'users/esqueci-senha.html'
+#recuperar-senha 
+def RecuperarSenhaView (request):
+    template_name = 'users/recuperar-senha.html'
     data = {}
     if request.method == 'POST':
+        #pegar email e senha do form e verificar se existe no banco de dados e se o email esta ativo trocar senha
         email = request.POST['email']
+        senha = request.POST['password']
         user = User.objects.get(email=email)
         if user is not None:
-            data['msg'] = 'Usuário ou senha inválidos!'
-            data['class'] = 'alert-danger'
+            user.set_password(senha)
+            user.save()
+            data['msg'] = 'Senha alterada com sucesso!'
+            data['class'] = 'alert-success'
+
+            
         else:
             data['msg'] = 'Usuário ou senha inválidos!'
             data['class'] = 'alert-danger'
+
     return render(request, template_name, data)
