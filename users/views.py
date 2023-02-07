@@ -1,14 +1,17 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from time import sleep
+
+from django.contrib.auth import authenticate, login, update_session_auth_hash
+from django.contrib.auth import logout as auth_login
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
-from django.contrib.auth import authenticate, login, logout as auth_login
 from django.contrib.auth.models import Group
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse_lazy
+from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
+                                  UpdateView)
 
-
-from users.forms import ItensForm, ItensFormExtends, UserForm
-
+from users.forms import (ItensForm, ItensFormExtends, PasswordChangeForm,
+                         UserForm, UserFormEdit)
 from users.models import *
 
 
@@ -26,11 +29,12 @@ def LoginPageView(request):
         else:
             data['msg'] = 'Usuário ou senha inválidos!'
             data['class'] = 'alert-danger'
-
+            
     return render(request, template_name, data)
     
 
 def CadastroPageView(request):
+    template_name = 'users/cadastro.html'
     data = {}
     csrfmiddlewaretoken = request.POST.get('csrfmiddlewaretoken')
 
@@ -48,37 +52,16 @@ def CadastroPageView(request):
             city=request.POST['city'],
            )
         user.username = request.POST['email']
-
-        if Group.objects.filter(name='feirante').exists():
-            group = Group.objects.get(name='feirante')
-            user.groups.add(group)
-            user.save()
-            data['msg'] = 'Usuário cadastrado com sucesso!'
-            data['class'] = 'alert-success'
-        else:
-            group = Group.objects.create(name='feirante')
-            user.groups.add(group)
-            user.save()
-            data['msg'] = 'Usuário cadastrado com sucesso!'
-            data['class'] = 'alert-success'
-
-       
-        return redirect('/')
+        group = Group.objects.get(name='feirantes')
+        user.groups.add(group)
+        user.save()
+        data['msg'] = 'Usuário cadastrado com sucesso!'
+        data['class'] = 'alert-success'
+        return redirect('users:login')
     else:
-        print (request.POST)
-       
+        data['form'] = UserForm()
 
-    return render(request, 'users/cadastro.html', data)
-
-def RecuperarPageView(request, pk):
-    #trocar a senha
-    user = User.objects.get(pk=pk, email=request.user.email)
-    user.set_password(request.POST['trocasenha'])
-    user.save()
-    logout(request)
-    redirect('/')
-   
-    return render(request, "users/recuperar.html")
+    return render(request, template_name, data)
 
 def logout(request):
     auth_login(request)
@@ -91,6 +74,10 @@ class PerfilPageView(ListView):
     template_name = 'users/perfil.html'
 
     
+    #get all information from user
+    def get_queryset(self):
+        return User.objects.all()
+        
 
     #get itens do usuario logado
     def get_context_data(self, **kwargs):
@@ -105,14 +92,16 @@ class PerfilPageView(ListView):
     def get_ordering (self):
         return ['id']
 
-#editar perfil
+#editar perfil enviar fotos e dados
 def PerfilEditView(request, pk):
     template_name = 'users/perfil-editar.html'
     data = {}
-    perfil = User.objects.get(pk=pk)
-    form = UserForm(request.POST or None, instance=perfil)
-    data['perfil'] = perfil
+    user = User.objects.get(pk=pk)
+    form = UserFormEdit(request.POST or None, request.FILES or None, instance=user)
+    
+    data['user'] = user
     data['form'] = form
+
     if request.method == 'POST':
         if form.is_valid():
             form.save()
@@ -120,7 +109,12 @@ def PerfilEditView(request, pk):
         else:
             data['form'] = form
             print(form.errors)
+
     return render(request, template_name, data)
+
+
+
+
 
 class PerfilDeleteView(DeleteView):
     model = User
@@ -133,9 +127,10 @@ def ItensEditView(request, pk):
     template_name = 'users/itens-editar.html'
     data = {}
     itens = ItensFeira.objects.get(pk=pk)
-    form = ItensForm(request.POST or None, instance=itens)
+    form = ItensForm(request.POST or None, request.FILES or None, instance=itens)
     data['itens'] = itens
     data['form'] = form
+    
     current_user = request.user
     if request.method == 'POST':
         #setar o usuario logado como dono do item
@@ -177,4 +172,25 @@ def ItensCreateView(request):
         form = ItensFormExtends()
         data['form'] = form
     return render(request, template_name, data)
-    
+
+#recuperar-senha 
+def RecuperarSenhaView (request):
+    template_name = 'users/recuperar-senha.html'
+    data = {}
+    if request.method == 'POST':
+        #pegar email e senha do form e verificar se existe no banco de dados e se o email esta ativo trocar senha
+        email = request.POST['email']
+        senha = request.POST['password']
+        user = User.objects.get(email=email)
+        if user is not None:
+            user.set_password(senha)
+            user.save()
+            data['msg'] = 'Senha alterada com sucesso!'
+            data['class'] = 'alert-success'
+
+            
+        else:
+            data['msg'] = 'Usuário ou senha inválidos!'
+            data['class'] = 'alert-danger'
+
+    return render(request, template_name, data)

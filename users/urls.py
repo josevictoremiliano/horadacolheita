@@ -1,4 +1,6 @@
-from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+from django.urls import path, include
 
 from .views import *
 
@@ -7,7 +9,7 @@ app_name = "users"
 urlpatterns = [
     path("login", LoginPageView, name="login"),
     path("cadastro", CadastroPageView, name="cadastro"),
-    path("perfil/<pk>/recuperar", RecuperarPageView, name="recuperar-senha"),
+    path("recuperarSenha", RecuperarSenhaView, name="recuperarSenha"),
     path('deslogar', logout),
     #perfil
     path('perfil', PerfilPageView.as_view(), name='perfil'),
@@ -21,3 +23,5 @@ urlpatterns = [
     path('perfil/criar-itens', ItensCreateView, name='itens-criar'),
 
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

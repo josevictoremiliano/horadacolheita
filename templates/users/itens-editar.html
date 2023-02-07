@@ -1,13 +1,22 @@
 {% extends 'layout.html' %} 
 {% load static %} 
 {% block title %}Editando o item{% endblock title %} 
+{%block active%}active{% endblock active%}
 {% block conteudo %}
 
-<div class="container">
+<div class="container text-white mt-4">
     <div class="row">
         <div class="col-md-12">
         <h1>Editar o item</h1>
-            <form action="" method="post" class="row">
+        <!-- Mostrar data com erro-->
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                <p>Por favor, corrija o erro abaixo.</p>
+                {{ form.errors }}
+            </div>
+        {% endif %}
+        <!-- Formulário -->
+            <form action="" method="post" class="row text-black-50 bg-glass-success p-2"  enctype="multipart/form-data">
             {% csrf_token %}
                 <div class="col-sm-6">
                     <div class="form-group">
@@ -29,6 +38,23 @@
                         <label for="id_image">Imagem</label>
                         {{form.image}}
                     </div>
+                    <div class="form-group d-none">
+                        <label for="id_category">quem esta criando este item:</label>
+                        {{form.feirante}}   
+                    </div>
+                    <input id="user_current" value="{{ request.user.id }}
+"  class="d-none"/>
+
+
+
+<script>
+    //setar o valor do campo 'id_feirante' para o usuário logado
+    current_user = document.getElementById('user_current').value;
+    const campo = document.getElementById('id_feirante')
+    campo.value = current_user
+   
+
+</script>
                 </div>
             <button type="submit" class="btn btn-primary">Salvar</button>
         </form>

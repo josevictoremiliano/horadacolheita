@@ -1,6 +1,7 @@
 {% extends 'layout.html' %} 
 {% load static %} 
 {% block title %}Criando novo Item{% endblock title %} 
+{%block active%}active{% endblock active%}
 {% block conteudo %}
 {% if form.errors %} 
 {% for field in form %} 
@@ -11,7 +12,7 @@
 {% endif %}
 
 <h1 class="text-center mt-1 text-white" >Criando novo Item</h1>
-<form method="post"  class="d-flex flex-column gap-3 container  form-control mt-5 mb-5 py-5 px-4">
+<form action="" method="post"  enctype='multipart-form-data' class="d-flex flex-column gap-3 container  form-control mt-5 mb-5 py-5 px-4">
 {% csrf_token %}
 
 <label for="id_name">Nome:</label>

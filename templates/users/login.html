@@ -1,47 +1,73 @@
 {% extends 'layout.html' %} 
 {% load static %} 
+{% block active %}active{% endblock active %}
 {% block title %}Hora da colheita{% endblock title %} 
+{% block css %}{% static '\css\login.css' %}{% endblock css %}
 {% block conteudo %}
 
-<main>
-    <div id="login">
-        <form class="card flex justify-content-center" method="post" id="oneValidade" action=""  class=" needs-validation" novalidate>
-         
-         
-          {% csrf_token %}
-   
-          <div class="card-body text-white flex flex-column justify-content-center align-items-center">
-            <h1 class="text-center pb-2">Login</h1>
-            {% if msg %}
-            <div class="alert {{ class }}" role="alert">
-              {{ msg }}
-            </div>
-          {% endif %}
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
-            </div>
-  
-            <div class="form-group">
-              <label for="password">Senha</label>
-              <input type="password" class="form-control" id="password" name="password" placeholder="Senha" required>
-            </div>
-          </div>
-  
-          <div class="card-footer">
-            <input type="submit" value="login" class="submit" />
-  
-            <a href="recuperar" class="recuperar_senha">Esqueceu a senha?</a>
-            <a href="cadastro" class="cadastro"> <h2>Cadastre-se</h2> </a>
-          </div>
-        </form>
-      </div>
-</main>
+<section class="container my-5">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-xl-10">
+        <div class="card border-0">
+            <div class="card-body p-0">
+                <div class="row no-gutters">
+                    <div class="col-lg-6">
+                        <div class="p-5">
+                            <div class="mb-5">
+                                <h3 class="h4 font-weight-bold text-theme">Login</h3>
+                            </div>
+                           
+                            <h6 class="h5 mb-0">Bem vindo de volta!</h6>
+                            <p class="text-muted mt-2 mb-5">Entre com seu email e senha para continuar.</p>
+                            
+                            {% if msg %}
+                            <div class="alert {{ class }}" role="alert">
+                              {{ msg }}
+                            </div>
+                          {% endif %}
+                            <form method="POST" enctype='multipart-form-data'>
+                              {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email">
+                                </div>
+                                <div class="form-group mb-5">
+                                    <label for="password">Senha</label>
+                                    <input type="password" class="form-control" id="password" name="password">
+                                </div>
+                                <button type="submit" class="btn btn-theme">Login</button>
+                                <a href="{% url 'users:recuperarSenha' %}" class="forgot-link float-right text-primary ps-2">Esqueceu a senha?</a>
 
+                                <p class=" text-muted mt-3 mb-0"> Não tem conta? <a href="cadastro" class="text-primary ml-1">Cadastre-se</a></p>
+                            </form>
+                        </div>
+                    </div>
 
-<footer id="footer" class="footer fixed-bottom  ">
-    <div class=" text-center text-light ">
-        <a href="https://portal.ifrn.edu.br" target="_blank">©2022 IFRN. All rights reserved </a>
+                    <div class="col-lg-6 d-none d-lg-inline-block">
+                        <div class="account-block rounded-right">
+                            <div class="overlay rounded-right">
+                             
+                            </div>
+                            <div class="account-testimonial">
+                              <img src="{% static '/img/loginImg.svg' %}" alt="login img" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- end card-body -->
+        </div>
+        <!-- end card -->
+
+        
+
+        <!-- end row -->
+
     </div>
-</footer>
+    <!-- end col -->
+</div>
+
+</section>
+
 {% endblock conteudo %}

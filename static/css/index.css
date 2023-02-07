@@ -1,0 +1,41 @@
+
+
+.card-glass,
+.card-glass-perfil{
+    background: rgba(255, 255, 255, 0.61) !important;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    min-height: 50vh;
+}
+
+.card-glass img{
+    width: 100% !important;
+    height: 10em !important;
+    align-self: center;
+    object-fit: cover;
+}
+
+.imgPerfil{
+    width: 15em!important;
+    height: 15em !important;
+    align-self: center;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .card-glass img{
+        width: 8em !important;
+        height: 8em !important;
+        align-self: center;
+    }
+    .col-sm-6{
+        flex: 0 0 auto  !important;
+        width: 50% !important;
+        margin-bottom: 1em;
+    }
+}

@@ -6,67 +6,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{% static '\css\style.css' %}" defer>
+    <link rel="stylesheet" type="text/css" href="{% static '\css\global.css' %}" defer>
+    <link rel="stylesheet" type="text/css" href="{% block css %}{% endblock css %}" defer>
     <title>{% block title %}{% endblock title %}</title>
 </head>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-          <a class="navbar-brand" href="/">Hora da colheita</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-md-auto">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Home</a>
-              </li>
-              {% if user.is_authenticated %} 
+  <nav class="navbar navbar-expand-lg navbar-light bg-glass-success">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <img src="{% static '/img/logo.svg' %}" alt="logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navHoraDaColheida" aria-controls="navHoraDaColheida" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse align-self-end mb-2" id="navHoraDaColheida">
+        <ul class="navbar-nav ms-md-auto ">
+          <li class="nav-item">
+            <a class="nav-link {% block activeI %}{% endblock activeI %}" aria-current="page" href="/">Início</a>
+          </li>
+          
+      
+          {% if user.is_authenticated %} 
                      
-                            <li><a class="nav-link " href="/perfil">  {{user.first_name }}</a></li>
-                        
-                            <li><a class="nav-link " href="/deslogar"></i> Sair</a></li>
-                
-                               
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="btn btn-success " href="{% url 'users:login' %}" value="Login">Login</a>
-                        </li>
-                    {% endif %}
-            </ul>
-          </div>
-        </div>
-      </nav>
+          <li class="nav-item">
+            <a class="nav-link {% block activepf %}{% endblock activepf %}" aria-current="page" href="/perfil">Meu Perfil</a>
+          </li>
+
+          <li><a class="nav-link " href="/deslogar"></i> Sair</a></li>
+
+             
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link {% block active %}{% endblock active %}" aria-current="page" href="/login">Login</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
 </header>
 <body>
         {% block conteudo %}
         {% endblock conteudo %}
 
-        <footer class="footer fixed-bottom">
-          <div class=" text-center text-light text-decoration-none">
-              <a href="https://portal.ifrn.edu.br" target="_blank">©2022 IFRN. All rights reserved </a>
-          </div>
-      </footer>
+        
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyBGHb3JpxyT9_-poRt7WG1bqpcAqBobaxU",
-    authDomain: "hora-da-colheita.firebaseapp.com",
-    databaseURL: "https://hora-da-colheita-default-rtdb.firebaseio.com",
-    projectId: "hora-da-colheita",
-    storageBucket: "hora-da-colheita.appspot.com",
-    messagingSenderId: "88774837356",
-    appId: "1:88774837356:web:7ec747a8cb4f4f496fc449"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-</script>
 </html>

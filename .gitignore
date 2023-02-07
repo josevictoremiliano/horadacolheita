@@ -59,6 +59,11 @@ coverage.xml
 *.log
 local_settings.py
 
+<<<<<<< HEAD
+=======
+db.sqlite3-journal
+>>>>>>> eb3367b117ace9e0dc859411361172890edc4259
+
 # Flask stuff:
 instance/
 .webassets-cache
