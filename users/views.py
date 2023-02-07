@@ -57,6 +57,7 @@ def CadastroPageView(request):
         user.save()
         data['msg'] = 'Usuário cadastrado com sucesso!'
         data['class'] = 'alert-success'
+        return redirect('users:login')
     else:
         data['form'] = UserForm()
 
